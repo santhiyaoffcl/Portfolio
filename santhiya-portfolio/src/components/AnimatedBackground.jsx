@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import ColorBends from './ColorBends';
 
 const Star = ({ top, left, size, delay, isShooting }) => {
   if (isShooting) {
@@ -91,6 +92,28 @@ const AnimatedBackground = ({ theme }) => {
       <div className={`absolute inset-0 bg-gradient-to-b from-[#10041c] via-[#210f3c] to-background transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`} />
       <div className={`absolute inset-0 bg-gradient-to-b from-sky-300 via-sky-100 to-background transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`} />
       
+      {/* ColorBends Canvas Backdrop */}
+      <div className="absolute inset-0 w-full h-full opacity-60">
+        <ColorBends
+          colors={isDark 
+            ? ["#ff5c7a", "#8a5cff", "#00ffd1", "#6366f1", "#a855f7"]
+            : ["#f472b6", "#a5b4fc", "#38bdf8", "#93c5fd", "#c084fc"]
+          }
+          rotation={45}
+          speed={0.15}
+          scale={1.1}
+          frequency={0.8}
+          warpStrength={0.8}
+          mouseInfluence={0.5}
+          noise={0.08}
+          parallax={0.2}
+          iterations={2}
+          intensity={1.2}
+          bandWidth={5}
+          transparent={true}
+        />
+      </div>
+
       {/* Night Elements */}
       <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
         {stars.map((star) => (
