@@ -86,81 +86,86 @@ const AnimatedBackground = ({ theme }) => {
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-[130vh] overflow-hidden pointer-events-none z-0">
-      
-      {/* Sky Gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-b from-[#10041c] via-[#210f3c] to-background transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`} />
-      <div className={`absolute inset-0 bg-gradient-to-b from-sky-300 via-sky-100 to-background transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`} />
-      
-      {/* ColorBends Canvas Backdrop */}
-      <div className="absolute inset-0 w-full h-full opacity-60">
-        <ColorBends
-          colors={isDark 
-            ? ["#ff5c7a", "#8a5cff", "#00ffd1", "#6366f1", "#a855f7"]
-            : ["#f472b6", "#a5b4fc", "#38bdf8", "#93c5fd", "#c084fc"]
-          }
-          rotation={45}
-          speed={0.15}
-          scale={1.1}
-          frequency={0.8}
-          warpStrength={0.8}
-          mouseInfluence={0.5}
-          noise={0.08}
-          parallax={0.2}
-          iterations={2}
-          intensity={1.2}
-          bandWidth={5}
-          transparent={true}
-        />
+    <>
+      {/* Fixed Background (ColorBends + Gradient + Stars) */}
+      <div className="fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none z-0">
+        {/* Sky Gradient */}
+        <div className={`absolute inset-0 bg-gradient-to-b from-[#10041c] via-[#210f3c] to-background transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`} />
+        <div className={`absolute inset-0 bg-gradient-to-b from-sky-300 via-sky-100 to-background transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`} />
+        
+        {/* ColorBends Canvas Backdrop */}
+        <div className="absolute inset-0 w-full h-full opacity-60">
+          <ColorBends
+            colors={isDark 
+              ? ["#ff5c7a", "#8a5cff", "#00ffd1", "#6366f1", "#a855f7"]
+              : ["#f472b6", "#a5b4fc", "#38bdf8", "#93c5fd", "#c084fc"]
+            }
+            rotation={45}
+            speed={0.15}
+            scale={1.1}
+            frequency={0.8}
+            warpStrength={0.8}
+            mouseInfluence={0.5}
+            noise={0.08}
+            parallax={0.2}
+            iterations={2}
+            intensity={1.2}
+            bandWidth={5}
+            transparent={true}
+          />
+        </div>
+
+        {/* Night Elements */}
+        <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
+          {stars.map((star) => (
+            <Star key={star.id} {...star} />
+          ))}
+        </div>
       </div>
 
-      {/* Night Elements */}
-      <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
-        {stars.map((star) => (
-          <Star key={star.id} {...star} />
-        ))}
+      {/* Scrolling Landscape Layer (Mountains + Clouds + Pines) */}
+      <div className="absolute top-0 left-0 w-full h-[100vh] overflow-hidden pointer-events-none z-0">
+        {/* Day Elements */}
+        <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
+          <Cloud top="10%" left="15%" size={200} delay={0} />
+          <Cloud top="25%" left="50%" size={300} delay={5} />
+          <Cloud top="15%" left="75%" size={150} delay={2} />
+        </div>
+
+        {/* Mountain Layer 1 (Farthest) */}
+        <svg viewBox="0 0 1440 400" className={`absolute bottom-[8%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'opacity-40 text-[#2a1744]' : 'opacity-50 text-sky-200'}`} preserveAspectRatio="none">
+          <path d="M0,250 L100,200 L250,280 L400,150 L600,260 L800,100 L1000,220 L1200,180 L1440,250 L1440,400 L0,400 Z" />
+        </svg>
+
+        {/* Mountain Layer 2 (Middle) */}
+        <svg viewBox="0 0 1440 400" className={`absolute bottom-[4%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'opacity-70 text-[#1e0f33]' : 'opacity-80 text-blue-200'}`} preserveAspectRatio="none">
+          <path d="M0,300 L150,220 L300,290 L500,180 L700,300 L950,150 L1200,280 L1440,220 L1440,400 L0,400 Z" />
+        </svg>
+
+        {/* Mountain Layer 3 (Closest) */}
+        <svg viewBox="0 0 1440 400" className={`absolute bottom-0 w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'text-[#0d0617]' : 'text-slate-300'}`} preserveAspectRatio="none">
+          <path d="M0,350 L200,280 L450,350 L650,250 L900,320 L1150,200 L1440,300 L1440,400 L0,400 Z" />
+        </svg>
+
+        {/* Pine Tree Forest Layer */}
+        <svg width="100%" height="150" className={`absolute bottom-0 transition-all duration-1000 fill-current ${isDark ? 'text-[#020205]' : 'text-slate-500'}`} preserveAspectRatio="none">
+          <defs>
+            <pattern id="pines-back" x="0" y="0" width="80" height="150" patternUnits="userSpaceOnUse">
+              <path d="M20,150 L20,110 L5,110 L25,70 L15,70 L30,30 L45,70 L35,70 L55,110 L40,110 L40,150 Z" opacity="0.6"/>
+              <path d="M60,150 L60,120 L50,120 L65,80 L55,80 L70,50 L85,80 L75,80 L90,120 L80,120 L80,150 Z" opacity="0.8"/>
+            </pattern>
+            <pattern id="pines-front" x="40" y="20" width="100" height="150" patternUnits="userSpaceOnUse">
+              <path d="M30,150 L30,100 L10,100 L35,60 L20,60 L45,10 L70,60 L55,60 L80,100 L60,100 L60,150 Z" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="100%" height="150" fill="url(#pines-back)" />
+          <rect x="0" y="0" width="100%" height="150" fill="url(#pines-front)" />
+        </svg>
+
+        {/* Fade overlay to perfectly blend the bottom into the rest of the site */}
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-background to-transparent" />
       </div>
-
-      {/* Day Elements */}
-      <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
-        <Cloud top="10%" left="15%" size={200} delay={0} />
-        <Cloud top="25%" left="50%" size={300} delay={5} />
-        <Cloud top="15%" left="75%" size={150} delay={2} />
-      </div>
-
-      {/* Mountain Layer 1 (Farthest) */}
-      <svg viewBox="0 0 1440 400" className={`absolute bottom-[8%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'opacity-40 text-[#2a1744]' : 'opacity-50 text-sky-200'}`} preserveAspectRatio="none">
-        <path d="M0,250 L100,200 L250,280 L400,150 L600,260 L800,100 L1000,220 L1200,180 L1440,250 L1440,400 L0,400 Z" />
-      </svg>
-
-      {/* Mountain Layer 2 (Middle) */}
-      <svg viewBox="0 0 1440 400" className={`absolute bottom-[4%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'opacity-70 text-[#1e0f33]' : 'opacity-80 text-blue-200'}`} preserveAspectRatio="none">
-        <path d="M0,300 L150,220 L300,290 L500,180 L700,300 L950,150 L1200,280 L1440,220 L1440,400 L0,400 Z" />
-      </svg>
-
-      {/* Mountain Layer 3 (Closest) */}
-      <svg viewBox="0 0 1440 400" className={`absolute bottom-0 w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'text-[#0d0617]' : 'text-slate-300'}`} preserveAspectRatio="none">
-        <path d="M0,350 L200,280 L450,350 L650,250 L900,320 L1150,200 L1440,300 L1440,400 L0,400 Z" />
-      </svg>
-
-      {/* Pine Tree Forest Layer */}
-      <svg width="100%" height="150" className={`absolute bottom-0 transition-all duration-1000 fill-current ${isDark ? 'text-[#020205]' : 'text-slate-500'}`} preserveAspectRatio="none">
-        <defs>
-          <pattern id="pines-back" x="0" y="0" width="80" height="150" patternUnits="userSpaceOnUse">
-            <path d="M20,150 L20,110 L5,110 L25,70 L15,70 L30,30 L45,70 L35,70 L55,110 L40,110 L40,150 Z" opacity="0.6"/>
-            <path d="M60,150 L60,120 L50,120 L65,80 L55,80 L70,50 L85,80 L75,80 L90,120 L80,120 L80,150 Z" opacity="0.8"/>
-          </pattern>
-          <pattern id="pines-front" x="40" y="20" width="100" height="150" patternUnits="userSpaceOnUse">
-            <path d="M30,150 L30,100 L10,100 L35,60 L20,60 L45,10 L70,60 L55,60 L80,100 L60,100 L60,150 Z" />
-          </pattern>
-        </defs>
-        <rect x="0" y="0" width="100%" height="150" fill="url(#pines-back)" />
-        <rect x="0" y="0" width="100%" height="150" fill="url(#pines-front)" />
-      </svg>
-
-      {/* Fade overlay to perfectly blend the bottom into the rest of the site */}
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-background to-transparent" />
-    </div>
+    </>
   );
 };
 
