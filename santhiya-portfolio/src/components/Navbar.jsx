@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Home, User, FolderGit2, Briefcase, Mail, Sun, Moon } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Home, User, FolderGit2, Briefcase, Mail } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', href: '#home', icon: Home },
@@ -70,9 +70,7 @@ const Navbar = ({ theme, setTheme }) => {
 
           {/* Socials & Actions */}
           <div className="flex items-center gap-2 pl-3 ml-1 border-l dark:border-white/10 border-black/10">
-            <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="p-2.5 rounded-full dark:hover:bg-white/10 hover:bg-black/5 transition-colors dark:text-zinc-300 text-zinc-600 dark:hover:text-white hover:text-zinc-900 group relative">
-              {theme === 'dark' ? <Sun size={18} className="group-hover:scale-110 transition-transform" /> : <Moon size={18} className="group-hover:scale-110 transition-transform" />}
-            </button>
+
             <a href="https://github.com/santhiyaoffcl" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full dark:hover:bg-white/10 hover:bg-black/5 transition-colors dark:text-zinc-300 text-zinc-600 dark:hover:text-white hover:text-zinc-900 group relative">
               <Github size={18} className="group-hover:scale-110 transition-transform" />
             </a>
@@ -95,12 +93,7 @@ const Navbar = ({ theme, setTheme }) => {
           </div>
         </a>
         <div className="flex items-center gap-4 z-50">
-          <button 
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
-            className="p-3 glass rounded-full dark:text-white text-zinc-900 border dark:border-white/10 border-black/10"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+
           <button 
             className="p-3 glass rounded-full dark:text-white text-zinc-900 border dark:border-white/10 border-black/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

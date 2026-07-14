@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import ColorBends from './ColorBends';
+import SparkleBackground from './SparkleBackground';
 
 const Star = ({ top, left, size, delay, isShooting }) => {
   if (isShooting) {
@@ -87,65 +87,37 @@ const AnimatedBackground = ({ theme }) => {
 
   return (
     <>
-      {/* Fixed Background (ColorBends + Gradient + Stars) */}
+      {/* Fixed Background (SparkleBackground + Stars) */}
       <div className="fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none z-0">
-
-        {/* ColorBends Canvas Backdrop */}
-        <div className="absolute inset-0 w-full h-full opacity-60">
-          <ColorBends
-            colors={isDark 
-              ? ["#ff5c7a", "#8a5cff", "#00ffd1", "#6366f1", "#a855f7"]
-              : ["#f472b6", "#a5b4fc", "#38bdf8", "#93c5fd", "#c084fc"]
-            }
-            rotation={45}
-            speed={0.15}
-            scale={1.1}
-            frequency={0.8}
-            warpStrength={1.0}
-            mouseInfluence={0.5}
-            noise={0.08}
-            parallax={0.2}
-            iterations={2}
-            intensity={1.2}
-            bandWidth={5}
-            transparent={true}
-          />
-        </div>
+        <SparkleBackground />
 
         {/* Night Elements */}
-        <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="transition-opacity duration-1000 opacity-100">
           {stars.map((star) => (
             <Star key={star.id} {...star} />
           ))}
         </div>
       </div>
 
-      {/* Scrolling Landscape Layer (Mountains + Clouds + Pines) */}
+      {/* Scrolling Landscape Layer (Mountains + Pines) */}
       <div className="absolute top-0 left-0 w-full h-[100vh] overflow-hidden pointer-events-none z-0">
-        {/* Day Elements */}
-        <div className={`transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
-          <Cloud top="10%" left="15%" size={200} delay={0} />
-          <Cloud top="25%" left="50%" size={300} delay={5} />
-          <Cloud top="15%" left="75%" size={150} delay={2} />
-        </div>
-
         {/* Mountain Layer 1 (Farthest) */}
-        <svg viewBox="0 0 1440 400" className={`absolute bottom-[8%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'opacity-40 text-[#2a1744]' : 'opacity-50 text-sky-200'}`} preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 400" className="absolute bottom-[8%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current opacity-40 text-[#2a1744]" preserveAspectRatio="none">
           <path d="M0,250 L100,200 L250,280 L400,150 L600,260 L800,100 L1000,220 L1200,180 L1440,250 L1440,400 L0,400 Z" />
         </svg>
 
         {/* Mountain Layer 2 (Middle) */}
-        <svg viewBox="0 0 1440 400" className={`absolute bottom-[4%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'opacity-70 text-[#1e0f33]' : 'opacity-80 text-blue-200'}`} preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 400" className="absolute bottom-[4%] w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current opacity-70 text-[#1e0f33]" preserveAspectRatio="none">
           <path d="M0,300 L150,220 L300,290 L500,180 L700,300 L950,150 L1200,280 L1440,220 L1440,400 L0,400 Z" />
         </svg>
 
         {/* Mountain Layer 3 (Closest) */}
-        <svg viewBox="0 0 1440 400" className={`absolute bottom-0 w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current ${isDark ? 'text-[#0d0617]' : 'text-slate-300'}`} preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 400" className="absolute bottom-0 w-full h-auto min-w-[1200px] transition-all duration-1000 fill-current text-[#0d0617]" preserveAspectRatio="none">
           <path d="M0,350 L200,280 L450,350 L650,250 L900,320 L1150,200 L1440,300 L1440,400 L0,400 Z" />
         </svg>
 
         {/* Pine Tree Forest Layer */}
-        <svg width="100%" height="150" className={`absolute bottom-0 transition-all duration-1000 fill-current ${isDark ? 'text-[#020205]' : 'text-slate-500'}`} preserveAspectRatio="none">
+        <svg width="100%" height="150" className="absolute bottom-0 transition-all duration-1000 fill-current text-[#020205]" preserveAspectRatio="none">
           <defs>
             <pattern id="pines-back" x="0" y="0" width="80" height="150" patternUnits="userSpaceOnUse">
               <path d="M20,150 L20,110 L5,110 L25,70 L15,70 L30,30 L45,70 L35,70 L55,110 L40,110 L40,150 Z" opacity="0.6"/>

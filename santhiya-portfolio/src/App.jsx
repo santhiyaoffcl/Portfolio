@@ -10,23 +10,12 @@ import AnimatedBackground from './components/AnimatedBackground';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-    }
-    return 'dark'; // Default to dark because of the beautiful night theme
-  });
+  const theme = 'dark';
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-background text-foreground scroll-smooth cursor-default transition-colors duration-700 ease-in-out">
