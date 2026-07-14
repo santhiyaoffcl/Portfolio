@@ -104,7 +104,7 @@ const AnimatedBackground = ({ theme }) => {
             speed={0.15}
             scale={1.1}
             frequency={0.8}
-            warpStrength={0.8}
+            warpStrength={1.0}
             mouseInfluence={0.5}
             noise={0.08}
             parallax={0.2}
