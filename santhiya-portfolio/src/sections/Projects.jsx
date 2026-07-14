@@ -1,40 +1,74 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ShieldCheck, Sprout, Video, ArrowUpRight } from 'lucide-react';
+import { Github, ExternalLink, ShieldCheck, Sprout, Video, ArrowUpRight, Cpu, LineChart, ShieldAlert } from 'lucide-react';
+
 
 const projects = [
   {
-    title: 'FarmChainX',
-    icon: <Sprout className="w-8 h-8 text-green-400" />,
-    problem: 'Transparency gaps in agriculture.',
-    solution: 'Traceability platform with QR & AI quality analysis.',
-    impact: 'End-to-end verifiable trust for consumers.',
-    tech: ['Spring Boot', 'Angular', 'MySQL', 'AI'],
+    title: 'SkillGap Intelligence Portal',
+    icon: <Cpu className="w-8 h-8 text-indigo-400" />,
+    problem: 'Sourcing target training resources for job roles.',
+    solution: 'AI-powered platform generating personalized learning roadmaps via Gemini API, with JWT auth, RBAC, and Docker deployment.',
+    impact: 'Automated gap analysis & custom learning curves.',
+    tech: ['Java 17', 'Spring Boot', 'React 19', 'MongoDB', 'Gemini API', 'Docker'],
     github: 'https://github.com/santhiyaoffcl',
     live: '#',
-    category: 'Full Stack'
+    category: 'GenAI / Full Stack'
   },
   {
     title: 'TruPhish',
     icon: <ShieldCheck className="w-8 h-8 text-blue-400" />,
-    problem: 'Rising phishing attacks.',
-    solution: 'Real-time AI detection with URL risk scoring.',
-    impact: 'Automated threat reduction at scale.',
-    tech: ['React', 'Node.js', 'FastAPI', 'ML'],
+    problem: 'Rising frequency of digital credential phishing.',
+    solution: 'Full-stack phishing detection system with URL scanning, an AI/ML classification model, risk scoring, and a microservices dashboard.',
+    impact: 'Real-time threat evaluation & risk profiling.',
+    tech: ['React.js', 'Node.js', 'Express.js', 'FastAPI', 'Python', 'MySQL'],
     github: 'https://github.com/santhiyaoffcl',
     live: '#',
     category: 'Cybersecurity'
   },
   {
-    title: 'AI Video Translator',
-    icon: <Video className="w-8 h-8 text-purple-400" />,
-    problem: 'Global language barriers.',
-    solution: 'Automated AI translation & dubbing pipeline.',
-    impact: 'Cost-effective content localization.',
-    tech: ['Python', 'Vosk', 'gTTS', 'FFmpeg'],
+    title: 'FarmChainX',
+    icon: <Sprout className="w-8 h-8 text-green-400" />,
+    problem: 'Supply chain vulnerability and lack of product tracking.',
+    solution: 'Full-stack supply chain platform with REST APIs, JWT auth, QR-based traceability, and AI-driven quality analysis to reduce fraud.',
+    impact: 'Verifiable product origin transparency.',
+    tech: ['Java', 'Spring Boot', 'Angular', 'MySQL', 'AI'],
     github: 'https://github.com/santhiyaoffcl',
     live: '#',
-    category: 'AI / Automation'
+    category: 'Web3 & Enterprise'
+  },
+  {
+    title: 'AI Audio & Video Translator',
+    icon: <Video className="w-8 h-8 text-purple-400" />,
+    problem: 'High manual costs for localizing audio-visual files.',
+    solution: 'Automated multilingual video dubbing pipeline using FFmpeg for accurate audio transcription, translation, and lip-syncing.',
+    impact: 'High-speed media translation & audio rendering.',
+    tech: ['Python', 'FFmpeg', 'Vosk', 'gTTS'],
+    github: 'https://github.com/santhiyaoffcl',
+    live: '#',
+    category: 'AI / Media'
+  },
+  {
+    title: 'Housing Dashboard Intelligence',
+    icon: <LineChart className="w-8 h-8 text-amber-400" />,
+    problem: 'Opaque real estate valuations and market forecasting.',
+    solution: 'Real estate analytics dashboard featuring price prediction using Random Forest and Linear Regression ML models.',
+    impact: 'Accurate value estimations and trends plotting.',
+    tech: ['Python', 'Machine Learning', 'Pandas', 'NumPy'],
+    github: 'https://github.com/santhiyaoffcl',
+    live: '#',
+    category: 'Data Science'
+  },
+  {
+    title: 'Fraud Detection & Risk Analytics',
+    icon: <ShieldAlert className="w-8 h-8 text-rose-400" />,
+    problem: 'High velocity financial transaction leaks and fraud.',
+    solution: 'Interactive fraud detection dashboard highlighting real-time transactional KPI analytics and risk scoring.',
+    impact: 'Interactive analytics for immediate risk detection.',
+    tech: ['Python', 'Machine Learning', 'Pandas', 'NumPy', 'Plotly'],
+    github: 'https://github.com/santhiyaoffcl',
+    live: '#',
+    category: 'Data Analytics'
   }
 ];
 

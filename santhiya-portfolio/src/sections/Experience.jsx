@@ -4,25 +4,38 @@ import { Briefcase, ArrowUpRight } from 'lucide-react';
 
 const experiences = [
   {
-    role: 'Web Development Intern',
-    company: 'Let’s GameTech',
-    period: '2023 - 2024',
-    description: 'Developed responsive user interfaces and optimized frontend performance for gaming platforms.',
+    role: 'Java Technology Stack Intern',
+    company: 'Infosys',
+    period: 'Feb 2026 - Apr 2026',
+    description: 'Developed a full-stack supply chain platform built using enterprise Java and modern web architecture.',
     contributions: [
-      'Built reusable cross-platform components using React.',
-      'Improved page load speeds by 40% through lazy loading.',
-      'Collaborated on pixel-perfect Figma implementations.'
+      'Built a robust supply chain tracing system using Java, Spring Boot, and Angular.',
+      'Designed and integrated secure REST APIs with JWT authentication and Role-Based Access Control (RBAC).',
+      'Implemented custom QR code generation and parsing to ensure full product-level traceability.',
+      'Managed relational database schemas and queries using MySQL.'
     ]
   },
   {
-    role: 'Java Intern',
-    company: 'Infosys (Virtual Internship)',
-    period: '2023',
-    description: 'Focused on backend development and enterprise Java standards.',
+    role: 'Data Analytics Intern',
+    company: 'Oasis Infobyte (Virtual Internship)',
+    period: 'Mar 2026 - Apr 2026',
+    description: 'Developed end-to-end data analytics and predictive machine learning models during a virtual internship program.',
     contributions: [
-      'Implemented backend logic using Spring Boot & Hibernate.',
-      'Managed complex data relationships in MySQL.',
-      'Ensured 90% code coverage through unit testing.'
+      'Built 3 high-impact analytics projects using Python, Pandas, NumPy, Scikit-learn, and Plotly.',
+      'Implemented real estate housing price prediction models using Random Forest and Linear Regression.',
+      'Developed transaction-level fraud detection models with low latency evaluation pipelines.',
+      'Created interactive analytics dashboards using Streamlit, Power BI, and Plotly.'
+    ]
+  },
+  {
+    role: 'Web Development Intern',
+    company: 'Let’s GameTech, Coimbatore',
+    period: 'Jun 2024 - Aug 2024',
+    description: 'Created and deployed highly responsive web user interfaces and optimized front-end loading speeds.',
+    contributions: [
+      'Developed responsive, cross-device compatible web pages using HTML, CSS, and JavaScript.',
+      'Collaborated with designers to implement pixel-perfect user interfaces from Figma mockups.',
+      'Identified and resolved UI layout bugs across multiple browser environments.'
     ]
   }
 ];
