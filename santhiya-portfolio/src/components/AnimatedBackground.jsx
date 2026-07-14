@@ -89,10 +89,7 @@ const AnimatedBackground = ({ theme }) => {
     <>
       {/* Fixed Background (ColorBends + Gradient + Stars) */}
       <div className="fixed inset-0 w-screen h-screen overflow-hidden pointer-events-none z-0">
-        {/* Sky Gradient */}
-        <div className={`absolute inset-0 bg-gradient-to-b from-[#10041c] via-[#210f3c] to-background transition-opacity duration-1000 ${isDark ? 'opacity-100' : 'opacity-0'}`} />
-        <div className={`absolute inset-0 bg-gradient-to-b from-sky-300 via-sky-100 to-background transition-opacity duration-1000 ${isDark ? 'opacity-0' : 'opacity-100'}`} />
-        
+
         {/* ColorBends Canvas Backdrop */}
         <div className="absolute inset-0 w-full h-full opacity-60">
           <ColorBends
