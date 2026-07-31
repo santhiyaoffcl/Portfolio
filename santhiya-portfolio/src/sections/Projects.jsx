@@ -151,10 +151,46 @@ const Projects = () => {
     return project.category === selectedCategory;
   });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 16
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      scale: 0.95, 
+      y: 20,
+      transition: { duration: 0.25, ease: 'easeInOut' } 
+    }
+  };
+
   return (
     <section id="projects" className="py-32">
       <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="max-w-3xl mb-16"
+        >
           <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-6">Portfolio</h2>
           <h3 className="text-4xl md:text-7xl font-display font-bold leading-[0.9] tracking-tighter mb-8 dark:text-white text-zinc-900">
             Architecture meets <span className="dark:text-zinc-600 text-zinc-400 italic">Ambition</span>.
@@ -162,10 +198,16 @@ const Projects = () => {
           <p className="text-xl dark:text-zinc-400 text-zinc-600 font-light max-w-xl">
             A selection of projects where I've tackled complex scalability and AI integration challenges.
           </p>
-        </div>
+        </motion.div>
 
         {/* Category Filter Buttons */}
-        <div className="flex flex-wrap gap-3 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap gap-3 mb-16"
+        >
           {categories.map(cat => (
             <button
               key={cat}
@@ -179,20 +221,32 @@ const Projects = () => {
               {cat}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Animate Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          layout 
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+        >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
               <motion.div
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
+                variants={cardVariants}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                whileHover={{ 
+                  y: -10, 
+                  scale: 1.02,
+                  transition: { type: 'spring', stiffness: 400, damping: 25 }
+                }}
                 key={project.title}
-                className="h-full"
+                className="h-full cursor-pointer"
               >
                 <ProjectCard project={project} />
               </motion.div>
