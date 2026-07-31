@@ -67,7 +67,13 @@ const Experience = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="glass p-10 rounded-[2.5rem] group dark:hover:bg-white/[0.05] hover:bg-black/[0.02] transition-all duration-500"
+                whileHover={{
+                  y: -8,
+                  scale: 1.01,
+                  borderColor: "rgba(59, 130, 246, 0.3)",
+                  boxShadow: "0 20px 40px -15px rgba(59, 130, 246, 0.15)"
+                }}
+                className="glass p-10 rounded-[2.5rem] group transition-all duration-500 cursor-pointer"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
                   <div className="flex items-center gap-6">

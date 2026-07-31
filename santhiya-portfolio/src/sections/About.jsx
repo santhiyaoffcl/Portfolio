@@ -277,20 +277,28 @@ const About = () => {
           
           <div className="relative pl-8 md:pl-12 border-l border-white/10 space-y-12">
             {education.map((edu, idx) => (
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
+              <div
                 key={edu.degree}
                 className="relative group"
               >
                 {/* Timeline Dot */}
-                <div className="absolute -left-[41px] md:-left-[57px] top-1.5 w-6 h-6 rounded-full bg-[#020205] border-2 border-accent-blue flex items-center justify-center group-hover:border-accent-purple transition-colors duration-300">
+                <div className="absolute -left-[41px] md:-left-[57px] top-1.5 w-6 h-6 rounded-full bg-[#020205] border-2 border-accent-blue flex items-center justify-center group-hover:border-accent-purple transition-colors duration-300 z-10">
                   <div className="w-2 h-2 rounded-full bg-accent-blue group-hover:bg-accent-purple transition-colors" />
                 </div>
 
-                <div className="glass p-8 md:p-10 rounded-[2.5rem] hover:border-accent-blue/30 transition-all duration-500 relative overflow-hidden">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  whileHover={{
+                    y: -6,
+                    scale: 1.01,
+                    boxShadow: "0 20px 40px -15px rgba(59, 130, 246, 0.15)",
+                    borderColor: "rgba(59, 130, 246, 0.3)"
+                  }}
+                  className="glass p-8 md:p-10 rounded-[2.5rem] transition-all duration-500 relative overflow-hidden cursor-pointer"
+                >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-accent-blue/5 rounded-full blur-2xl pointer-events-none" />
                   
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
@@ -320,8 +328,8 @@ const About = () => {
                   <p className="text-zinc-400 text-sm font-light leading-relaxed max-w-4xl">
                     {edu.details}
                   </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -340,8 +348,14 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{
+                  y: -6,
+                  scale: 1.02,
+                  boxShadow: "0 20px 40px -15px rgba(168, 85, 247, 0.15)",
+                  borderColor: "rgba(168, 85, 247, 0.3)"
+                }}
                 key={cert.id}
-                className="glass p-8 rounded-[2rem] hover:border-accent-purple/30 dark:hover:bg-white/[0.05] transition-all duration-300 relative group flex flex-col justify-between"
+                className="glass p-8 rounded-[2rem] transition-all duration-300 relative group flex flex-col justify-between cursor-pointer"
               >
                 <div className="absolute top-4 right-4 text-accent-purple/20 group-hover:text-accent-purple/60 transition-colors">
                   <CheckCircle2 className="w-5 h-5" />
