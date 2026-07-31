@@ -8,7 +8,7 @@ const LOGO_MAPPING = {
   'Python': { src: 'https://cdn.simpleicons.org/python', title: 'Python' },
   'JavaScript': { src: 'https://cdn.simpleicons.org/javascript', title: 'JavaScript' },
   'Spring Boot': { src: 'https://cdn.simpleicons.org/springboot', title: 'Spring Boot' },
-  'Angular': { src: 'https://cdn.simpleicons.org/angular', title: 'Angular' },
+  'Angular': { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg', title: 'Angular' },
   'React': { src: 'https://cdn.simpleicons.org/react', title: 'React' },
   'Node.js': { src: 'https://cdn.simpleicons.org/nodedotjs', title: 'Node.js' },
   'Express.js': { src: 'https://cdn.simpleicons.org/express/ffffff', title: 'Express.js' },
