@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Home, User, FolderGit2, Briefcase, Mail } from 'lucide-react';
 
 const navLinks = [
@@ -15,6 +15,13 @@ const Navbar = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -27,6 +34,11 @@ const Navbar = () => {
         ? 'bg-black/60 backdrop-blur-2xl border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
         : 'bg-transparent border-transparent'
     }`}>
+      {/* Scroll Progress Indicator */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent-blue via-indigo-500 to-accent-purple origin-[0%]"
+        style={{ scaleX }}
+      />
       <div className="container mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo Badge */}
         <a href="#" className="flex items-center group relative">

@@ -208,19 +208,29 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex flex-wrap gap-3 mb-16"
         >
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
-                selectedCategory === cat
-                  ? 'bg-accent-blue text-white shadow-lg shadow-accent-blue/20'
-                  : 'dark:text-zinc-400 text-zinc-600 dark:hover:text-white hover:text-zinc-900 glass'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map(cat => {
+            const isSelected = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`relative px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
+                  isSelected
+                    ? 'text-white'
+                    : 'dark:text-zinc-400 text-zinc-600 dark:hover:text-white hover:text-zinc-900 glass border-transparent'
+                }`}
+              >
+                {isSelected && (
+                  <motion.div
+                    layoutId="active-category"
+                    className="absolute inset-0 bg-accent-blue rounded-full shadow-lg shadow-accent-blue/25 z-0"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
+            );
+          })}
         </motion.div>
 
         {/* Animate Grid */}
