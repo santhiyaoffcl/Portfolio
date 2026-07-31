@@ -126,29 +126,55 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             {/* Left side: Sticky info index column */}
             <div className="lg:col-span-1 lg:sticky lg:top-32 space-y-6">
-              <div className="glass p-8 rounded-[2rem] border border-white/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-accent-blue/5 rounded-full blur-2xl pointer-events-none" />
-                <h4 className="text-xl font-bold mb-4 text-white">Skills Index</h4>
-                <p className="text-sm text-zinc-400 leading-relaxed font-light mb-6">
-                  Structured stack mapping representing core competencies in system engineering, backend services, client interfaces, and database paradigms.
+              <div className="glass p-8 rounded-[2.5rem] border border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-accent-blue/5 rounded-full blur-3xl pointer-events-none" />
+                <h4 className="text-xl font-bold mb-3 text-white tracking-tight">Skills Index</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed font-light mb-6">
+                  Structured competency catalog across core backend, frontend, database, and operational platforms.
                 </p>
-                <div className="space-y-4">
-                  {skillCategories.map((cat, idx) => (
-                    <button
-                      key={cat.title}
-                      onClick={() => setActiveCategory(cat.title)}
-                      className={`flex items-center gap-3 text-xs font-semibold w-full text-left py-1 transition-all duration-300 group ${
-                        activeCategory === cat.title ? 'text-white' : 'text-zinc-400 hover:text-zinc-200'
-                      }`}
-                    >
-                      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                        activeCategory === cat.title 
-                          ? 'bg-accent-blue scale-125 shadow-[0_0_8px_#3b82f6]' 
-                          : 'bg-zinc-600 group-hover:bg-zinc-400'
-                      }`} />
-                      {cat.title}
-                    </button>
-                  ))}
+                <div className="space-y-3">
+                  {skillCategories.map((cat, idx) => {
+                    const isActive = activeCategory === cat.title;
+                    return (
+                      <button
+                        key={cat.title}
+                        onClick={() => setActiveCategory(cat.title)}
+                        className={`flex items-center justify-between p-3.5 w-full rounded-2xl border transition-all duration-300 group relative ${
+                          isActive
+                            ? 'bg-[#0f0f1c]/80 border-accent-blue/40 text-white shadow-[0_4px_20px_rgba(59,130,246,0.15)]'
+                            : 'bg-white/[0.01] border-white/[0.04] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03] hover:border-white/10'
+                        }`}
+                      >
+                        {/* Hover/Active Background Radial Glow */}
+                        {isActive && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-accent-blue/10 via-transparent to-accent-purple/10 rounded-2xl pointer-events-none" />
+                        )}
+                        
+                        <div className="flex items-center gap-3 relative z-10">
+                          {/* Mini icon container */}
+                          <div className={`p-2 rounded-xl transition-all duration-300 ${
+                            isActive 
+                              ? 'bg-accent-blue/15 text-accent-blue' 
+                              : 'bg-white/[0.03] text-zinc-500 group-hover:text-zinc-300'
+                          }`}>
+                            {React.cloneElement(cat.icon, { className: 'w-4 h-4' })}
+                          </div>
+                          <span className="text-xs font-bold tracking-wide">
+                            {cat.title}
+                          </span>
+                        </div>
+
+                        {/* Items count badge */}
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md transition-all duration-300 relative z-10 ${
+                          isActive 
+                            ? 'bg-accent-blue/20 text-white border border-accent-blue/30' 
+                            : 'bg-white/5 text-zinc-500 group-hover:text-zinc-400'
+                        }`}>
+                          {cat.skills.length}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
