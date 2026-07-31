@@ -48,9 +48,9 @@ const Experience = () => {
           <div className="lg:w-1/3">
             <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-6">Professional Context</h2>
             <h3 className="text-4xl md:text-6xl font-display font-bold mb-10 leading-tight">
-              A career built on <span className="dark:text-zinc-500 text-zinc-400 italic">curiosity</span> and grit.
+              A career built on <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-purple to-accent-blue italic font-bold">curiosity</span> and grit.
             </h3>
-            <p className="text-xl dark:text-zinc-400 text-zinc-600 font-light leading-relaxed mb-10">
+            <p className="text-xl dark:text-zinc-300 text-zinc-700 font-light leading-relaxed mb-10">
               My professional background is rooted in software engineering and data analysis, 
               delivering robust enterprise solutions and consumer-facing apps.
             </p>

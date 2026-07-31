@@ -55,9 +55,8 @@ const Cloud = ({ top, left, size, delay }) => (
   </motion.div>
 );
 
-const AnimatedBackground = ({ theme }) => {
+const AnimatedBackground = () => {
   const [stars, setStars] = useState([]);
-  const isDark = theme === 'dark';
   
   useEffect(() => {
     // Generate static stars and shooting stars

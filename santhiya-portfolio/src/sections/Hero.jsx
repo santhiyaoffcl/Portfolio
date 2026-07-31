@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import ColorBends from '../components/ColorBends';
 
 const Hero = () => {
   const scrollRef = useRef(null);
@@ -13,7 +14,23 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={scrollRef} className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+    <section ref={scrollRef} id="home" className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+      {/* Background Interactive Fluid/Color Bends Shader */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-25 dark:opacity-20">
+        <ColorBends 
+          speed={0.12}
+          scale={1.2}
+          frequency={1.2}
+          warpStrength={1.5}
+          colors={['#3b82f6', '#a855f7', '#6366f1']}
+          transparent={true}
+          noise={0.06}
+          iterations={2}
+          intensity={1.6}
+          bandWidth={4.5}
+        />
+      </div>
+ 
       <motion.div style={{ y, opacity }} className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -25,7 +42,7 @@ const Hero = () => {
             Empowering Digital Solutions
           </div>
           
-          <h1 className="text-6xl md:text-9xl font-display font-bold leading-[0.9] mb-12 tracking-tighter">
+          <h1 className="text-5xl md:text-8xl font-display font-bold leading-tight mb-12 tracking-tight">
             <span className="bg-gradient-to-b dark:from-white dark:via-white dark:to-zinc-500 from-zinc-900 via-zinc-800 to-zinc-500 bg-clip-text text-transparent">
               Santhiya S
             </span>

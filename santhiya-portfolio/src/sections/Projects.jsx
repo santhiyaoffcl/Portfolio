@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, ShieldCheck, Sprout, Video, ArrowUpRight, Cpu, LineChart, ShieldAlert } from 'lucide-react';
 
 
@@ -72,7 +72,7 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
@@ -81,11 +81,7 @@ const ProjectCard = ({ project, index }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
+    <div
       onMouseMove={handleMouseMove}
       className="group relative glass rounded-[2.5rem] p-10 overflow-hidden flex flex-col h-full dark:border-white/[0.05] border-black/[0.05] hover:border-accent-blue/30 transition-all duration-500"
     >
@@ -138,29 +134,71 @@ const ProjectCard = ({ project, index }) => {
           </a>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const categories = ['All', 'GenAI / Full Stack', 'Cybersecurity', 'Web3 & Enterprise', 'AI / Media', 'Data & Analytics'];
+
+  const filteredProjects = projects.filter(project => {
+    if (selectedCategory === 'All') return true;
+    if (selectedCategory === 'Data & Analytics') {
+      return project.category === 'Data Science' || project.category === 'Data Analytics';
+    }
+    return project.category === selectedCategory;
+  });
+
   return (
     <section id="projects" className="py-32">
       <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-24">
+        <div className="max-w-3xl mb-16">
           <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-6">Portfolio</h2>
           <h3 className="text-4xl md:text-7xl font-display font-bold leading-[0.9] tracking-tighter mb-8 dark:text-white text-zinc-900">
-            Architecture meet <span className="dark:text-zinc-600 text-zinc-400 italic">Ambition</span>.
+            Architecture meets <span className="dark:text-zinc-600 text-zinc-400 italic">Ambition</span>.
           </h3>
           <p className="text-xl dark:text-zinc-400 text-zinc-600 font-light max-w-xl">
             A selection of projects where I've tackled complex scalability and AI integration challenges.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-          {projects.map((project, idx) => (
-            <ProjectCard key={project.title} project={project} index={idx} />
+        {/* Category Filter Buttons */}
+        <div className="flex flex-wrap gap-3 mb-16">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
+                selectedCategory === cat
+                  ? 'bg-accent-blue text-white shadow-lg shadow-accent-blue/20'
+                  : 'dark:text-zinc-400 text-zinc-600 dark:hover:text-white hover:text-zinc-900 glass'
+              }`}
+            >
+              {cat}
+            </button>
           ))}
         </div>
+
+        {/* Animate Grid */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, idx) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                key={project.title}
+                className="h-full"
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,9 +1,33 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Database, Layout, Terminal, Box, Award, GraduationCap, Trophy, CheckCircle2 } from 'lucide-react';
+import { Code2, Database, Layout, Terminal, Box, Award, GraduationCap, Trophy, CheckCircle2, BadgeAlert, ArrowUpRight } from 'lucide-react';
+
+const LOGO_MAPPING = {
+  'C': { src: 'https://cdn.simpleicons.org/c', title: 'C' },
+  'Java': { src: 'https://cdn.simpleicons.org/java', title: 'Java' },
+  'Python': { src: 'https://cdn.simpleicons.org/python', title: 'Python' },
+  'JavaScript': { src: 'https://cdn.simpleicons.org/javascript', title: 'JavaScript' },
+  'Spring Boot': { src: 'https://cdn.simpleicons.org/springboot', title: 'Spring Boot' },
+  'Angular': { src: 'https://cdn.simpleicons.org/angular', title: 'Angular' },
+  'React': { src: 'https://cdn.simpleicons.org/react', title: 'React' },
+  'Node.js': { src: 'https://cdn.simpleicons.org/nodedotjs', title: 'Node.js' },
+  'Express.js': { src: 'https://cdn.simpleicons.org/express/ffffff', title: 'Express.js' },
+  'PHP': { src: 'https://cdn.simpleicons.org/php', title: 'PHP' },
+  'HTML': { src: 'https://cdn.simpleicons.org/html5', title: 'HTML' },
+  'CSS': { src: 'https://cdn.simpleicons.org/css3', title: 'CSS' },
+  'MySQL': { src: 'https://cdn.simpleicons.org/mysql', title: 'MySQL' },
+  'MongoDB': { src: 'https://cdn.simpleicons.org/mongodb', title: 'MongoDB' },
+  'Git': { src: 'https://cdn.simpleicons.org/git', title: 'Git' },
+  'GitHub': { src: 'https://cdn.simpleicons.org/github/ffffff', title: 'GitHub' },
+  'Postman': { src: 'https://cdn.simpleicons.org/postman', title: 'Postman' },
+  'Vercel': { src: 'https://cdn.simpleicons.org/vercel/ffffff', title: 'Vercel' },
+  'Figma': { src: 'https://cdn.simpleicons.org/figma', title: 'Figma' },
+  'MS Excel': { src: 'https://cdn.simpleicons.org/microsoftexcel', title: 'MS Excel' },
+  'MS Word': { src: 'https://cdn.simpleicons.org/microsoftword', title: 'MS Word' },
+};
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState('skills');
+  const [activeCategory, setActiveCategory] = useState('Programming');
 
   const skillCategories = [
     {
@@ -39,202 +63,307 @@ const About = () => {
       institution: 'V.S.B Engineering College',
       period: '2023 - 2027',
       location: 'Karur, Tamil Nadu',
-      score: 'CGPA: 8.28'
+      score: 'CGPA: 8.28',
+      details: 'Specialized curriculum bridging Computer Science foundations with Business Systems Management, Enterprise Technology, and Systems Engineering.'
     },
     {
       degree: 'Higher Secondary (Class XII)',
       institution: 'Cheran Matric Hr. Sec. School',
       period: '2023',
       location: 'Karur, Tamil Nadu',
-      score: 'Percentage: 77.6%'
+      score: '77.6%',
+      details: 'Focus on Mathematics, Physics, and Chemistry.'
     }
   ];
 
   const certifications = [
-    'NPTEL — Programming in Java',
-    'Infosys Springboard — Java Foundation',
-    'Forage — GenAI Data Analytics Simulation',
-    'Coursera — Data Visualization in MS PowerPoint',
-    'Salesforce — Agentforce Champion'
+    { name: 'Programming in Java', issuer: 'NPTEL', id: 'nptel-java' },
+    { name: 'Java Foundation', issuer: 'Infosys Springboard', id: 'infosys-java' },
+    { name: 'GenAI Data Analytics Simulation', issuer: 'Forage', id: 'forage-genai' },
+    { name: 'Data Visualization in MS PowerPoint', issuer: 'Coursera', id: 'coursera-ppt' },
+    { name: 'Agentforce Champion', issuer: 'Salesforce', id: 'salesforce-agent' }
   ];
 
   const achievements = [
-    'Selected for Round 2 of the AI-Driven Nation Buildathon by Capgemini after clearing the initial evaluation round.'
+    {
+      title: 'AI-Driven Nation Buildathon',
+      organizer: 'Capgemini',
+      milestone: 'Selected for Round 2',
+      description: 'Staged into the top tier of the national buildathon following initial project and architecture evaluation on AI-driven solution ideas.'
+    }
   ];
 
   return (
     <section id="about" className="py-32 relative">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-20 items-start">
-          
-          {/* Left Side: Summary & Navigation */}
+      <div className="container mx-auto px-6 space-y-32">
+        
+        {/* Intro Summary Header */}
+        <div className="max-w-4xl">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:w-1/2 w-full"
+            transition={{ duration: 0.8 }}
+            className="w-full"
           >
             <h2 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-6">Discovery</h2>
             <h3 className="text-4xl md:text-6xl font-display font-bold mb-10 leading-tight">
-              Solving problems through <span className="dark:text-zinc-500 text-zinc-400 italic">intentional</span> code.
+              Solving problems through <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-purple italic font-bold">intentional</span> code.
             </h3>
-            
-            <div className="space-y-6 text-xl dark:text-zinc-400 text-zinc-600 font-light leading-relaxed mb-12">
-              <p>
-                Final year B.Tech CSBS student skilled in Java, Spring Boot, Angular, React, REST APIs, JWT/OAuth, and RBAC. 
-                Experienced in data analytics, machine learning, and fraud detection, seeking a Software Developer or Data Analyst role.
-              </p>
-            </div>
-
-            {/* Tab Buttons */}
-            <div className="flex flex-wrap gap-4 border-b dark:border-white/[0.08] border-black/[0.08] pb-4">
-              {[
-                { id: 'skills', label: 'Technical Skills', icon: <Code2 className="w-4 h-4" /> },
-                { id: 'education', label: 'Education', icon: <GraduationCap className="w-4 h-4" /> },
-                { id: 'certs', label: 'Credentials & Honours', icon: <Award className="w-4 h-4" /> }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold tracking-wider uppercase transition-all duration-300 ${
-                    activeTab === tab.id
-                      ? 'bg-accent-blue text-white shadow-lg shadow-accent-blue/20'
-                      : 'dark:text-zinc-400 text-zinc-600 dark:hover:text-white hover:text-zinc-900 glass'
-                  }`}
-                >
-                  {tab.icon}
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+            <p className="text-xl dark:text-zinc-300 text-zinc-700 font-light leading-relaxed max-w-3xl">
+              Final year B.Tech CSBS student skilled in Java, Spring Boot, Angular, React, REST APIs, JWT/OAuth, and RBAC. 
+              Experienced in data analytics, machine learning, and fraud detection, seeking a Software Developer or Data Analyst role.
+            </p>
           </motion.div>
+        </div>
 
-          {/* Right Side: Tab Panel Content */}
-          <div className="lg:w-1/2 w-full min-h-[400px] relative">
-            <AnimatePresence mode="wait">
-              {activeTab === 'skills' && (
-                <motion.div
-                  key="skills"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                >
+        {/* 1. Technical Skills Section */}
+        <div className="space-y-12">
+          <div className="border-l-4 border-accent-blue pl-4">
+            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-2">Capabilities</h3>
+            <h4 className="text-3xl md:text-4xl font-display font-bold">Technical Skills</h4>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            {/* Left side: Sticky info index column */}
+            <div className="lg:col-span-1 lg:sticky lg:top-32 space-y-6">
+              <div className="glass p-8 rounded-[2rem] border border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-accent-blue/5 rounded-full blur-2xl pointer-events-none" />
+                <h4 className="text-xl font-bold mb-4 text-white">Skills Index</h4>
+                <p className="text-sm text-zinc-400 leading-relaxed font-light mb-6">
+                  Structured stack mapping representing core competencies in system engineering, backend services, client interfaces, and database paradigms.
+                </p>
+                <div className="space-y-4">
                   {skillCategories.map((cat, idx) => (
-                    <div
+                    <button
                       key={cat.title}
-                      className="glass p-8 rounded-[2rem] dark:hover:bg-white/[0.05] hover:bg-black/[0.05] transition-all group"
+                      onClick={() => setActiveCategory(cat.title)}
+                      className={`flex items-center gap-3 text-xs font-semibold w-full text-left py-1 transition-all duration-300 group ${
+                        activeCategory === cat.title ? 'text-white' : 'text-zinc-400 hover:text-zinc-200'
+                      }`}
                     >
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="p-3 rounded-2xl bg-accent-blue/10 text-accent-blue group-hover:text-accent-purple group-hover:bg-accent-purple/10 transition-all">
-                          {cat.icon}
-                        </div>
-                        <h4 className="text-lg font-bold tracking-tight">{cat.title}</h4>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {cat.skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-3 py-1 dark:bg-white/[0.03] bg-black/[0.03] border dark:border-white/[0.05] border-black/[0.05] rounded-full text-xs dark:text-zinc-500 text-zinc-600 dark:group-hover:text-zinc-300 group-hover:text-zinc-900 transition-colors"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                        activeCategory === cat.title 
+                          ? 'bg-accent-blue scale-125 shadow-[0_0_8px_#3b82f6]' 
+                          : 'bg-zinc-600 group-hover:bg-zinc-400'
+                      }`} />
+                      {cat.title}
+                    </button>
                   ))}
-                </motion.div>
-              )}
+                </div>
+              </div>
+            </div>
 
-              {activeTab === 'education' && (
-                <motion.div
-                  key="education"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col gap-6"
-                >
-                  {education.map((edu) => (
-                    <div
-                      key={edu.degree}
-                      className="glass p-10 rounded-[2.5rem] flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-accent-blue/20 transition-all duration-300"
+            {/* Right side: Detailed vertical category cards */}
+            <div className="lg:col-span-2 min-h-[300px]">
+              <AnimatePresence mode="wait">
+                {skillCategories
+                  .filter((cat) => cat.title === activeCategory)
+                  .map((cat, idx) => (
+                    <motion.div
+                      key={cat.title}
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.3 }}
+                      className="glass p-8 rounded-[2.5rem] hover:border-accent-blue/20 transition-all duration-300 group relative overflow-hidden"
                     >
-                      <div className="flex items-start gap-6">
-                        <div className="w-14 h-14 rounded-2xl glass flex items-center justify-center text-accent-blue bg-accent-blue/5">
-                          <GraduationCap className="w-7 h-7" />
+                      <div className="flex items-center justify-between gap-4 mb-8">
+                        <div className="flex items-center gap-4">
+                          <div className="p-3 rounded-2xl bg-accent-blue/10 text-accent-blue group-hover:text-accent-purple group-hover:bg-accent-purple/10 transition-all">
+                            {cat.icon}
+                          </div>
+                          <h4 className="text-lg font-bold tracking-tight text-white">{cat.title}</h4>
                         </div>
-                        <div>
-                          <h4 className="text-xl font-bold tracking-tight dark:text-white text-zinc-900 mb-1">
-                            {edu.degree}
-                          </h4>
-                          <p className="text-accent-blue font-semibold text-sm mb-2">{edu.institution}</p>
-                          <p className="dark:text-zinc-500 text-zinc-500 text-sm">{edu.location}</p>
-                        </div>
-                      </div>
-                      <div className="md:text-right flex flex-col gap-2">
-                        <span className="px-4 py-1.5 glass rounded-full text-xs font-bold text-zinc-500 whitespace-nowrap self-start md:self-end">
-                          {edu.period}
-                        </span>
-                        <span className="text-lg font-bold dark:text-white text-zinc-900 tracking-tight">
-                          {edu.score}
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 bg-white/5 rounded-full text-zinc-400">
+                          {cat.skills.length} Items
                         </span>
                       </div>
-                    </div>
+                      
+                      <div className="flex flex-wrap gap-3">
+                        {cat.skills.map((skill) => {
+                          const logo = LOGO_MAPPING[skill];
+                          return (
+                            <div
+                              key={skill}
+                              className="flex items-center gap-3 px-4 py-2 bg-white/[0.02] border border-white/[0.05] rounded-full hover:border-accent-blue/30 dark:hover:bg-white/[0.04] transition-all duration-300 group/item"
+                            >
+                              {logo && (
+                                <img
+                                  src={logo.src}
+                                  alt={logo.title}
+                                  className="h-5 w-auto object-contain transition-transform duration-300 group-hover/item:scale-110"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                  }}
+                                />
+                              )}
+                              <span className="text-sm font-medium text-zinc-300 group-hover/item:text-white transition-colors">
+                                {logo ? logo.title : skill}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
                   ))}
-                </motion.div>
-              )}
-
-              {activeTab === 'certs' && (
-                <motion.div
-                  key="certs"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col gap-8"
-                >
-                  {/* Certifications Card */}
-                  <div className="glass p-10 rounded-[2.5rem] hover:border-accent-purple/20 transition-all duration-300">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="p-3 rounded-2xl bg-accent-purple/10 text-accent-purple">
-                        <Award className="w-6 h-6" />
-                      </div>
-                      <h4 className="text-2xl font-bold tracking-tight">Professional Certifications</h4>
-                    </div>
-                    <ul className="space-y-4">
-                      {certifications.map((cert) => (
-                        <li key={cert} className="flex items-start text-sm dark:text-zinc-400 text-zinc-700">
-                          <CheckCircle2 className="w-5 h-5 text-accent-purple mt-0.5 mr-3 flex-shrink-0" />
-                          <span className="font-medium">{cert}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Achievements Card */}
-                  <div className="glass p-10 rounded-[2.5rem] hover:border-accent-blue/20 transition-all duration-300">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="p-3 rounded-2xl bg-accent-blue/10 text-accent-blue">
-                        <Trophy className="w-6 h-6" />
-                      </div>
-                      <h4 className="text-2xl font-bold tracking-tight">Key Achievements</h4>
-                    </div>
-                    <ul className="space-y-4">
-                      {achievements.map((ach) => (
-                        <li key={ach} className="flex items-start text-sm dark:text-zinc-400 text-zinc-700">
-                          <Trophy className="w-5 h-5 text-accent-blue mt-0.5 mr-3 flex-shrink-0" />
-                          <span className="font-medium">{ach}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
+
+        {/* 2. Education Section - Vertical Timeline */}
+        <div className="space-y-12">
+          <div className="border-l-4 border-accent-blue pl-4">
+            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-2">Qualifications</h3>
+            <h4 className="text-3xl md:text-4xl font-display font-bold">Education Journey</h4>
+          </div>
+          
+          <div className="relative pl-8 md:pl-12 border-l border-white/10 space-y-12">
+            {education.map((edu, idx) => (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                key={edu.degree}
+                className="relative group"
+              >
+                {/* Timeline Dot */}
+                <div className="absolute -left-[41px] md:-left-[57px] top-1.5 w-6 h-6 rounded-full bg-[#020205] border-2 border-accent-blue flex items-center justify-center group-hover:border-accent-purple transition-colors duration-300">
+                  <div className="w-2 h-2 rounded-full bg-accent-blue group-hover:bg-accent-purple transition-colors" />
+                </div>
+
+                <div className="glass p-8 md:p-10 rounded-[2.5rem] hover:border-accent-blue/30 transition-all duration-500 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-accent-blue/5 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+                    <div className="flex items-start gap-4 md:gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-accent-blue/10 text-accent-blue flex items-center justify-center flex-shrink-0">
+                        <GraduationCap className="w-7 h-7" />
+                      </div>
+                      <div>
+                        <h4 className="text-xl md:text-2xl font-bold tracking-tight text-white mb-2 leading-tight">
+                          {edu.degree}
+                        </h4>
+                        <p className="text-accent-blue font-medium text-sm">{edu.institution}</p>
+                        <p className="text-zinc-500 text-xs mt-1">{edu.location}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-row md:flex-col items-center md:items-end gap-3 self-start md:self-center">
+                      <span className="px-4 py-1.5 glass border border-white/10 rounded-full text-xs font-bold text-zinc-400 whitespace-nowrap">
+                        {edu.period}
+                      </span>
+                      <span className="px-4 py-1.5 bg-accent-blue/20 border border-accent-blue/30 rounded-full text-sm font-black text-white tracking-wide shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                        {edu.score}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="text-zinc-400 text-sm font-light leading-relaxed max-w-4xl">
+                    {edu.details}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* 3. Certifications Section - Showcase Grid */}
+        <div className="space-y-12">
+          <div className="border-l-4 border-accent-purple pl-4">
+            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-purple mb-2">Verification</h3>
+            <h4 className="text-3xl md:text-4xl font-display font-bold">Certifications & Badges</h4>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certifications.map((cert, idx) => (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                key={cert.id}
+                className="glass p-8 rounded-[2rem] hover:border-accent-purple/30 dark:hover:bg-white/[0.05] transition-all duration-300 relative group flex flex-col justify-between"
+              >
+                <div className="absolute top-4 right-4 text-accent-purple/20 group-hover:text-accent-purple/60 transition-colors">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-accent-purple/10 text-accent-purple border border-accent-purple/20">
+                    {cert.issuer}
+                  </div>
+                  <h4 className="text-lg font-bold leading-snug text-white group-hover:text-accent-purple transition-colors">
+                    {cert.name}
+                  </h4>
+                </div>
+
+                <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-xs text-zinc-500">
+                  <span className="flex items-center gap-1">
+                    <Award className="w-3.5 h-3.5 text-accent-purple" /> Credential Verified
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* 4. Key Achievements Section - Spotlight Card */}
+        <div className="space-y-12">
+          <div className="border-l-4 border-accent-blue pl-4">
+            <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-accent-blue mb-2">Honours</h3>
+            <h4 className="text-3xl md:text-4xl font-display font-bold">Key Achievements</h4>
+          </div>
+
+          {achievements.map((ach) => (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              key={ach.title}
+              className="glass p-10 md:p-12 rounded-[3rem] border border-accent-blue/20 hover:border-accent-blue/40 transition-all duration-500 relative overflow-hidden group shadow-2xl"
+            >
+              {/* Radial gradient spotlight background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-accent-blue/10 via-accent-purple/5 to-transparent pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              <div className="relative z-10 flex flex-col lg:flex-row gap-8 lg:items-center justify-between">
+                <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8">
+                  <div className="p-6 rounded-3xl bg-accent-blue/10 text-accent-blue group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-accent-blue/5">
+                    <Trophy className="w-10 h-10" />
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="px-3 py-1 bg-accent-blue/20 border border-accent-blue/30 rounded-full text-[10px] font-bold uppercase tracking-widest text-white">
+                        {ach.organizer}
+                      </span>
+                      <span className="px-3 py-1 bg-accent-purple/20 border border-accent-purple/30 rounded-full text-[10px] font-bold uppercase tracking-widest text-white">
+                        {ach.milestone}
+                      </span>
+                    </div>
+                    <h4 className="text-2xl md:text-3xl font-display font-bold text-white">
+                      {ach.title}
+                    </h4>
+                    <p className="text-zinc-400 font-light text-sm md:text-base max-w-3xl leading-relaxed">
+                      {ach.description}
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href="https://github.com/santhiyaoffcl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-4 glass border border-white/10 rounded-full text-xs font-bold uppercase tracking-wider text-white hover:bg-accent-blue hover:text-white hover:border-accent-blue transition-all duration-300 group/btn self-start lg:self-center"
+                >
+                  Project Details
+                  <ArrowUpRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
