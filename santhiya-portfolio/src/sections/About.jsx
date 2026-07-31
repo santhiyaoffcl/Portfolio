@@ -4,7 +4,7 @@ import { Code2, Database, Layout, Terminal, Box, Award, GraduationCap, Trophy, C
 
 const LOGO_MAPPING = {
   'C': { src: 'https://cdn.simpleicons.org/c', title: 'C' },
-  'Java': { src: 'https://cdn.simpleicons.org/java', title: 'Java' },
+  'Java': { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', title: 'Java' },
   'Python': { src: 'https://cdn.simpleicons.org/python', title: 'Python' },
   'JavaScript': { src: 'https://cdn.simpleicons.org/javascript', title: 'JavaScript' },
   'Spring Boot': { src: 'https://cdn.simpleicons.org/springboot', title: 'Spring Boot' },
