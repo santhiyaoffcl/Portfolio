@@ -161,10 +161,21 @@ const About = () => {
                   .map((cat, idx) => (
                     <motion.div
                       key={cat.title}
-                      initial={{ opacity: 0, x: 15 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -15 }}
-                      transition={{ duration: 0.3 }}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      variants={{
+                        hidden: { opacity: 0, x: 15 },
+                        visible: {
+                          opacity: 1,
+                          x: 0,
+                          transition: {
+                            staggerChildren: 0.04,
+                            duration: 0.3
+                          }
+                        },
+                        exit: { opacity: 0, x: -15, transition: { duration: 0.2 } }
+                      }}
                       className="glass p-8 rounded-[2.5rem] hover:border-accent-blue/20 transition-all duration-300 group relative overflow-hidden"
                     >
                       <div className="flex items-center justify-between gap-4 mb-8">
@@ -179,28 +190,48 @@ const About = () => {
                         </span>
                       </div>
                       
-                      <div className="flex flex-wrap gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         {cat.skills.map((skill) => {
                           const logo = LOGO_MAPPING[skill];
                           return (
-                            <div
+                            <motion.div
                               key={skill}
-                              className="flex items-center gap-3 px-4 py-2 bg-white/[0.02] border border-white/[0.05] rounded-full hover:border-accent-blue/30 dark:hover:bg-white/[0.04] transition-all duration-300 group/item"
+                              variants={{
+                                hidden: { opacity: 0, y: 15, scale: 0.95 },
+                                visible: { opacity: 1, y: 0, scale: 1 }
+                              }}
+                              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                              whileHover={{ 
+                                y: -6, 
+                                scale: 1.03,
+                                boxShadow: "0 12px 20px -8px rgba(59, 130, 246, 0.25), 0 8px 10px -6px rgba(139, 92, 246, 0.15)",
+                                borderColor: "rgba(59, 130, 246, 0.4)"
+                              }}
+                              className="group/item flex flex-col items-center justify-center p-5 rounded-2xl bg-[#0c0c14]/40 border border-white/[0.04] backdrop-blur-md transition-all duration-300 relative aspect-square cursor-pointer"
                             >
-                              {logo && (
-                                <img
-                                  src={logo.src}
-                                  alt={logo.title}
-                                  className="h-5 w-auto object-contain transition-transform duration-300 group-hover/item:scale-110"
-                                  onError={(e) => {
-                                    e.target.style.display = 'none';
-                                  }}
-                                />
-                              )}
-                              <span className="text-sm font-medium text-zinc-300 group-hover/item:text-white transition-colors">
-                                {logo ? logo.title : skill}
-                              </span>
-                            </div>
+                              {/* Hover Radial Glow Gradient */}
+                              <div className="absolute inset-0 bg-gradient-to-b from-accent-blue/5 to-accent-purple/5 opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                              
+                              <div className="relative z-10 flex flex-col items-center justify-center gap-3 h-full w-full">
+                                <div className="h-12 w-12 flex items-center justify-center rounded-xl bg-white/[0.02] border border-white/[0.05] group-hover/item:bg-white/[0.05] group-hover/item:border-accent-blue/20 transition-all duration-300">
+                                  {logo ? (
+                                    <img
+                                      src={logo.src}
+                                      alt={logo.title}
+                                      className="h-7 w-7 object-contain transition-all duration-300 group-hover/item:scale-110 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"
+                                      onError={(e) => {
+                                        e.target.style.display = 'none';
+                                      }}
+                                    />
+                                  ) : (
+                                    <Box className="w-6 h-6 text-zinc-400 group-hover/item:text-accent-blue transition-colors" />
+                                  )}
+                                </div>
+                                <span className="text-xs font-semibold text-zinc-300 group-hover/item:text-white transition-colors text-center px-1">
+                                  {logo ? logo.title : skill}
+                                </span>
+                              </div>
+                            </motion.div>
                           );
                         })}
                       </div>
