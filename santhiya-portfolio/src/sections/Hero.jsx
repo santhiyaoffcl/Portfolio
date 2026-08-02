@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import ColorBends from '../components/ColorBends';
+import SplitText from '../components/SplitText';
 
 const Hero = () => {
   const scrollRef = useRef(null);
@@ -43,9 +44,14 @@ const Hero = () => {
           </div>
           
           <h1 className="text-5xl md:text-8xl font-display font-bold leading-tight mb-12 tracking-tight">
-            <span className="bg-gradient-to-b dark:from-white dark:via-white dark:to-zinc-500 from-zinc-900 via-zinc-800 to-zinc-500 bg-clip-text text-transparent">
-              Santhiya S
-            </span>
+            <SplitText
+              text="Santhiya S"
+              className="bg-gradient-to-b dark:from-white dark:via-white dark:to-zinc-500 from-zinc-900 via-zinc-800 to-zinc-500 bg-clip-text text-transparent"
+              delay={80}
+              duration={1.2}
+              ease="power4.out"
+              tag="span"
+            />
           </h1>
 
           <div className="max-w-3xl mx-auto mb-16 space-y-6">
